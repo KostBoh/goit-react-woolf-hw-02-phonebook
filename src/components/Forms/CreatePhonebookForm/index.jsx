@@ -11,7 +11,7 @@ const CreatePhonebookForm = () => {
     console.log(value);
   };
   return (
-    <div className="container">
+    <div className={styles.container}>
       <h1>Phonebook</h1>
       <form onSubmit={handleSubmit}>
         <label htmlFor="name">Name</label>
