@@ -3,21 +3,20 @@ import styles from './CreatePhonebookForm.module.css';
 
 class CreatePhonebookForm extends Component {
   state = {
-    value: '',
+    name: '',
   };
 
   handleSubmit = e => {
     e.preventDefault();
-    // console.log(e);
+    this.props.submit(this.state.name);
+    this.setState({ name: '' });
   };
 
   handleChange = ({ target: { value } }) => {
-    console.log(value);
-    if (value.includes('@')) return;
-    this.setState({ value });
+    this.setState({ name: value });
   };
+
   render() {
-    // console.log(this.state.value);
     return (
       <div className={styles.container}>
         <h1>Phonebook</h1>
@@ -34,8 +33,6 @@ class CreatePhonebookForm extends Component {
           />
           <button type="submit">Add contact</button>
         </form>
-        <h2>Contacts</h2>
-        <ul></ul>
       </div>
     );
   }
