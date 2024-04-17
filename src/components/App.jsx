@@ -17,6 +17,13 @@ class App extends Component {
   };
 
   createNewContact = (name, number) => {
+    const existingContact = this.state.contacts.find(
+      contact => contact.name.toLowerCase() === name.toLowerCase()
+    );
+    if (existingContact) {
+      alert(`${name} is already in contacts.`);
+      return;
+    }
     const newContact = {
       id: nanoid(),
       name,
