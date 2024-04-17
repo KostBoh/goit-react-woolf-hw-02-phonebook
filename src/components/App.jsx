@@ -1,7 +1,8 @@
-import CreatePhonebookForm from './Forms/CreatePhonebookForm';
-import styles from './App.module.css';
+import Filter from './Filter/Filter';
+import ContactList from './ContactList/ContactList';
 import { nanoid } from 'nanoid';
-
+import CreatePhonebookForm from './CreatePhonebookForm/CreatePhonebookForm';
+import styles from './App.module.css';
 const { Component } = require('react');
 
 class App extends Component {
@@ -13,8 +14,6 @@ class App extends Component {
       { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
     ],
     filter: '',
-    name: '',
-    number: '',
   };
 
   createNewContact = (name, number) => {
@@ -29,50 +28,22 @@ class App extends Component {
     }));
   };
 
-  handleChange = e => {
-    const { name, value } = e.target;
-    this.setState({ [name]: value });
-  };
-
-  filterContacts = () => {
-    const { contacts, filter } = this.state;
-    return contacts.filter(contact =>
-      contact.name.toLocaleLowerCase().includes(filter.toLowerCase())
-    );
+  handleFilterChange = e => {
+    this.setState({ filter: e.target.value });
   };
 
   render() {
-    const filteredContacts = this.filterContacts();
+    const filteredContacts = this.state.contacts.filter(contact =>
+      contact.name.toLowerCase().includes(this.state.filter.toLowerCase())
+    );
     return (
-      <>
+      <div className={styles.container}>
+        <h1 className={styles.heading}>Phonebook</h1>
         <CreatePhonebookForm submit={this.createNewContact} />
-        <div className={styles.container}>
-          <form>
-            <h2>Contacts</h2>
-            <label htmlFor="filter">Find contacts by name</label>
-            <input
-              type="text"
-              name="filter"
-              value={this.state.filter}
-              onChange={this.handleChange}
-            />
-            <ul>
-              {filteredContacts.map(contact => (
-                <li key={contact.id}>
-                  {contact.name}: {contact.number}
-                </li>
-              ))}
-            </ul>
-            {/* <ul>
-              {this.state.contacts.map(contact => (
-                <li key={contact.id}>
-                  {contact.name}: {contact.number}
-                </li>
-              ))}
-            </ul> */}
-          </form>
-        </div>
-      </>
+        <h2 className={styles.subheading}>Contacts</h2>
+        <Filter value={this.state.filter} onChange={this.handleFilterChange} />
+        <ContactList contacts={filteredContacts} />
+      </div>
     );
   }
 }
