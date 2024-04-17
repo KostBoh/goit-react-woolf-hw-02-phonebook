@@ -8,7 +8,8 @@ class CreatePhonebookForm extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    this.props.submit(this.state.name);
+    const { name } = this.state;
+    this.props.submit(name);
     this.setState({ name: '' });
   };
 
@@ -23,7 +24,7 @@ class CreatePhonebookForm extends Component {
         <form onSubmit={this.handleSubmit}>
           <label htmlFor="name">Name</label>
           <input
-            value={this.state.value}
+            value={this.state.name}
             type="text"
             name="name"
             pattern="^[a-zA-Zа-яА-Я]+(([' \-][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
