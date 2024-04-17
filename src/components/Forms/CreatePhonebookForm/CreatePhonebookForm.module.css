@@ -30,6 +30,13 @@ input[type='text'] {
   border-radius: 3px;
 }
 
+input[type='tel'] {
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
 button {
   padding: 10px 20px;
   background-color: #007bff;

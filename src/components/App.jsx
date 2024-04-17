@@ -7,6 +7,7 @@ const { Component } = require('react');
 class App extends Component {
   state = {
     contacts: [],
+    filter: '',
   };
 
   createNewContact = name => {
@@ -24,12 +25,16 @@ class App extends Component {
       <>
         <CreatePhonebookForm submit={this.createNewContact} />
         <div className={styles.container}>
-          <h2>Contacts</h2>
-          <ul>
-            {this.state.contacts.map(contact => (
-              <li key={contact.id}>{contact.name}</li>
-            ))}
-          </ul>
+          <form>
+            <h2>Contacts</h2>
+            <label htmlFor="find">Find contacts by name</label>
+            <input type="text" />
+            <ul>
+              {this.state.contacts.map(contact => (
+                <li key={contact.id}>{contact.name}</li>
+              ))}
+            </ul>
+          </form>
         </div>
       </>
     );
